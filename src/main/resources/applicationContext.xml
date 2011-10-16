@@ -11,12 +11,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 		">
 
-	<context:load-time-weaver aspectj-weaving="on"/>
-
-	<aop:aspectj-autoproxy/>
-
 	<context:component-scan base-package="com.blogspot.nurkiewicz"/>
 
-	<tx:annotation-driven mode="aspectj"/>
+	<tx:annotation-driven/>
 
 </beans>

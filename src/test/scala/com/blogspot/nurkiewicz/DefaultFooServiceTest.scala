@@ -16,7 +16,7 @@ import org.scalatest.junit.JUnitRunner
 class DefaultFooServiceTest extends FunSuite with ShouldMatchers with SpringRule{
 
 	@Resource
-	private val fooService: DefaultFooService = null
+	private val fooService: FooService = null
 
 	test("calling method from interface should apply transactional aspect") {
 		fooService.inInterfaceTransactional()
@@ -24,15 +24,6 @@ class DefaultFooServiceTest extends FunSuite with ShouldMatchers with SpringRule
 
 	test("calling non-transactional method from interface should start transaction for all called methods") {
 		fooService.inInterfaceNotTransactional()
-	}
-
-	test("calling public transactional method not belonging to interface") {
-		fooService.publicNotInInterfaceButTransactional()
-	}
-
-	test("calling public but not transactional method not belonging to interface " +
-			"should start transaction for all called methods") {
-		fooService.publicNotInInterfaceAndNotTransactional()
 	}
 
 }
