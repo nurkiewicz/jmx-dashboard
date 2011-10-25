@@ -26,7 +26,6 @@ class DefaultFooService extends FooService {
 		throwIfNotInTransaction()
 	}
 
-	@Transactional
 	def publicNotInInterfaceAndNotTransactional() {
 		inInterfaceTransactional()
 		publicNotInInterfaceButTransactional()
