@@ -1,4 +1,4 @@
-package com.blogspot.nurkiewicz
+package com.blogspot.nurkiewicz.spring
 
 import org.springframework.web.WebApplicationInitializer
 import org.springframework.web.context.ContextLoaderListener

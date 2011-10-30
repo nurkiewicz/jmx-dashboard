@@ -1,4 +1,4 @@
-package com.blogspot.nurkiewicz
+package com.blogspot.nurkiewicz.spring
 
 import org.springframework.web.servlet.config.annotation.{WebMvcConfigurerAdapter, EnableWebMvc}
 import org.springframework.context.annotation.{Configuration, ComponentScan}
@@ -11,7 +11,5 @@ import org.springframework.context.annotation.{Configuration, ComponentScan}
 @ComponentScan(basePackages = Array("com.blogspot.nurkiewicz.web"))
 @EnableWebMvc
 class RestConfiguration extends WebMvcConfigurerAdapter {
-
-	println("RestConfiguration")
 
 }

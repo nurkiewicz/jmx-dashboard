@@ -10,8 +10,6 @@ import org.springframework.stereotype.{Service, Controller}
 @Controller
 class FooController {
 
-	println("FooController")
-
 	@RequestMapping(value = Array("/echo/{payload}"), method=Array(RequestMethod.GET))
 	@ResponseBody
 	def echo(@PathVariable("payload") payload: String) = payload

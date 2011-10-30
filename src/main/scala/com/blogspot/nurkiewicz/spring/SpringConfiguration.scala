@@ -1,4 +1,4 @@
-package com.blogspot.nurkiewicz
+package com.blogspot.nurkiewicz.spring
 
 import org.apache.commons.dbcp.BasicDataSource
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
