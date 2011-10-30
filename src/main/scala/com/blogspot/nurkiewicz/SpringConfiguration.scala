@@ -1,15 +1,22 @@
 package com.blogspot.nurkiewicz
 
 import org.apache.commons.dbcp.BasicDataSource
-import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
 import reflect.Block
+import org.springframework.transaction.annotation.EnableTransactionManagement
+import org.springframework.context.annotation.{ComponentScan, Bean, Configuration}
+import org.springframework.stereotype.Controller
+import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 /**
  * @author Tomasz Nurkiewicz
  * @since 09.10.11, 23:01
  */
-@Configuration
+@EnableTransactionManagement
+@ComponentScan(basePackages = Array("com.blogspot.nurkiewicz"), excludeFilters = Array(
+	new ComponentScan.Filter(value = classOf[Controller]),
+	new ComponentScan.Filter(value = classOf[EnableWebMvc])
+))
 class SpringConfiguration {
 
 	@Bean(destroyMethod = "close")

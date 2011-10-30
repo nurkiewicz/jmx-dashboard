@@ -12,7 +12,7 @@ import org.scalatest.junit.JUnitRunner
  * @since 25.09.11, 19:30
  */
 @RunWith(classOf[JUnitRunner])
-@ContextConfiguration
+@ContextConfiguration(classes = Array[Class[_]](classOf[SpringConfiguration]))
 class DefaultFooServiceTest extends FunSuite with ShouldMatchers with SpringRule{
 
 	@Resource
