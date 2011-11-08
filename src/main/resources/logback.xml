@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
 	<logger name="org" level="INFO"/>
+	<logger name="org.hibernate.tool.hbm2ddl" level="ALL"/>
+	<logger name="org.hibernate.SQL" level="ALL"/>
 	<logger name="org.springframework.web" level="INFO"/>
 
 	<root level="ALL">
