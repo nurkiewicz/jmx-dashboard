@@ -19,6 +19,7 @@ import com.blogspot.nurkiewicz.BookDao
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor
 import org.springframework.context.annotation._
+import org.hibernate.cfg.ImprovedNamingStrategy
 
 /**
  * @author Tomasz Nurkiewicz
@@ -59,7 +60,8 @@ class SpringConfiguration {
 		entityManagerFactoryBean.setJpaPropertyMap(
 			Map(
 				"hibernate.hbm2ddl.auto" -> "create",
-				"hibernate.format_sql" -> "true"
+				"hibernate.format_sql" -> "true",
+				"hibernate.ejb.naming_strategy" -> classOf[ImprovedNamingStrategy].getName
 			).asJava
 		)
 		entityManagerFactoryBean
