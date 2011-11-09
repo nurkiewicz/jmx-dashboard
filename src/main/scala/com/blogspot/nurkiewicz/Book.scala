@@ -5,6 +5,7 @@ import org.springframework.data.repository.PagingAndSortingRepository
 import javax.persistence.{OneToMany, GeneratedValue, Id, Entity}
 import java.{util => ju}
 import java.{lang => jl}
+import org.springframework.data.jpa.repository.{Modifying, Query}
 
 /**
  * @author Tomasz Nurkiewicz
@@ -25,4 +26,10 @@ class Book(@BeanProperty var title: String, @BeanProperty var author: String, @B
 
 }
 
-trait BookDao extends PagingAndSortingRepository[Book, jl.Integer]
+trait BookDao extends PagingAndSortingRepository[Book, jl.Integer] {
+
+	@Modifying
+	@Query("UPDATE Book b SET b.author = NULL WHERE b.publishedYear = ?1")
+	def eraseAuthorOfBooksPublishedIn(year: Int): Int
+
+}

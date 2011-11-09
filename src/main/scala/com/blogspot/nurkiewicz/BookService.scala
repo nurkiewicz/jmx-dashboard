@@ -1,10 +1,10 @@
 package com.blogspot.nurkiewicz
 
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import javax.annotation.PostConstruct
+import org.springframework.transaction.annotation.{Propagation, Transactional}
 
 /**
  * @author Tomasz Nurkiewicz
@@ -78,5 +78,8 @@ class BookService @Autowired() (bookDao: BookDao) {
 	def listBooks(page: PageRequest) = bookDao findAll page
 
 	def findBy(id: Int) = Option(bookDao.findOne(id))
+
+	@Transactional(propagation = Propagation.NESTED)
+	def eraseAuthorOfBooksPublishedIn(year: Int) = bookDao.eraseAuthorOfBooksPublishedIn(year)
 
 }
