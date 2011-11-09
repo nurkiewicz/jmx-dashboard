@@ -1,9 +1,10 @@
 package com.blogspot.nurkiewicz
 
 import reflect.BeanProperty
-import javax.persistence.{GeneratedValue, Id, Entity}
 import org.springframework.data.repository.PagingAndSortingRepository
-import org.springframework.transaction.annotation.Transactional
+import javax.persistence.{OneToMany, GeneratedValue, Id, Entity}
+import java.{util => ju}
+import java.{lang => jl}
 
 /**
  * @author Tomasz Nurkiewicz
@@ -19,7 +20,9 @@ class Book(@BeanProperty var title: String, @BeanProperty var author: String, @B
 	@GeneratedValue
 	var id = 0
 
+	@OneToMany(mappedBy = "book")
+	var reviews: ju.Set[Review] = new ju.HashSet()
+
 }
 
-@Transactional
-trait BookDao extends PagingAndSortingRepository[Book, java.lang.Integer]
+trait BookDao extends PagingAndSortingRepository[Book, jl.Integer]
