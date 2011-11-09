@@ -20,6 +20,7 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor
 import org.springframework.context.annotation._
 import org.hibernate.cfg.ImprovedNamingStrategy
+import org.h2.tools.Server
 
 /**
  * @author Tomasz Nurkiewicz
@@ -79,5 +80,8 @@ class SpringConfiguration {
 
 	@Bean
 	def persistenceAnnotationBeanPostProcessor() = new PersistenceAnnotationBeanPostProcessor()
+
+	@Bean(initMethod = "start", destroyMethod = "stop")
+	def h2WebServer() = Server.createWebServer("-webDaemon", "-webAllowOthers")
 
 }
