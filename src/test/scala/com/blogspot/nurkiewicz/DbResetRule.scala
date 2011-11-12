@@ -18,11 +18,12 @@ trait DbResetRule extends Suite with BeforeAndAfterEach with BeforeAndAfterAll {
 
 	@Resource val dataSource: DataSource = null
 
-	val dbScriptFile = File.createTempFile("h2db", ".sql")
+	val dbScriptFile = File.createTempFile(classOf[DbResetRule].getSimpleName + "-", ".sql")
 
 	override protected def beforeAll() {
 		val jdbc = new JdbcTemplate(dataSource)
 		jdbc.execute("SCRIPT NOPASSWORDS DROP TO '" + dbScriptFile.getPath + "'")
+		dbScriptFile.deleteOnExit()
 		super.beforeAll()
 	}
 
