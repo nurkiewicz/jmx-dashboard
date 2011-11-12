@@ -19,7 +19,7 @@ import collection.JavaConversions._
  */
 @RunWith(classOf[JUnitRunner])
 @ContextConfiguration(classes = Array[Class[_]](classOf[SpringConfiguration]))
-class BookServiceTest extends FunSuite with ShouldMatchers with BeforeAndAfterAll with SpringRule {
+class BookServiceTest extends FunSuite with ShouldMatchers with BeforeAndAfterAll with DbResetSpringRule {
 
 	implicit def fun2Callable[T](fun: => T) = new Callable[T] {
 		def call() = fun
