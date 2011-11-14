@@ -1,11 +1,5 @@
-import com.blogspot.nurkiewicz.Book;
-import com.blogspot.nurkiewicz.BookService;
-import com.blogspot.nurkiewicz.Review;
-import com.blogspot.nurkiewicz.ReviewDao;
+import com.blogspot.nurkiewicz.*;
 import com.blogspot.nurkiewicz.spring.SpringConfiguration;
-import org.apache.commons.io.FileUtils;
-import org.fest.assertions.Fail;
-import org.h2.tools.Server;
 import org.hibernate.LazyInitializationException;
 import org.junit.After;
 import org.junit.Before;
@@ -15,15 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import scala.Option;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -107,6 +96,23 @@ public class BookServiceTransactionalTest {
 
 		//then
 		assertThat(loadedBook.getAuthor()).isNotEqualTo("Clark Kent");
+	}
+
+	@Test
+	public void shouldDeleteEntityAndThrowAnException() throws Exception {
+		//given
+		final Book someBook = findAnyExistingBook();
+
+		try {
+			//when
+			bookService.deleteAndThrow(someBook);
+			fail();
+		} catch (OppsException e) {
+			//then
+			final Option<Book> deletedBook = bookService.findBy(someBook.id());
+			assertThat(deletedBook.isEmpty()).isTrue();
+		}
+
 	}
 
 	@Test
