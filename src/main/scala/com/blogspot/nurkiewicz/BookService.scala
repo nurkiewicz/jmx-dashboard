@@ -82,6 +82,7 @@ class BookService @Autowired() (bookDao: BookDao) {
 	@Transactional(propagation = Propagation.NESTED)
 	def eraseAuthorOfBooksPublishedIn(year: Int) = bookDao.eraseAuthorOfBooksPublishedIn(year)
 
+	@Transactional(noRollbackForClassName = Array("com.blogspot.nurkiewicz.OppsException"))
 	def deleteAndThrow(book: Book) {
 		bookDao delete book
 		throw new OppsException
