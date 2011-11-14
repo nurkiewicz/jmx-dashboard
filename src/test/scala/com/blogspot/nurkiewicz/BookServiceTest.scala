@@ -69,6 +69,17 @@ class BookServiceTest extends FunSuite with ShouldMatchers with BeforeAndAfterAl
 		loadedBook.author should not equal ("Clark Kent")
 	}
 
+	test("should delete entity and throw an exception") {
+		val someBook = findAnyExistingBook();
+
+		intercept[OppsException] {
+			bookService.deleteAndThrow(someBook);
+		}
+
+		bookService findBy someBook.id should be(None)
+
+	}
+
 	test("should store review in second thread") {
 		val someBook = findAnyExistingBook()
 		executorService.submit {
