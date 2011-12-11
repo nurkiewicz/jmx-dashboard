@@ -5,6 +5,7 @@ import org.springframework.web.context.ContextLoaderListener
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext
 import org.springframework.web.servlet.DispatcherServlet
 import javax.servlet.ServletContext
+import org.jolokia.http.AgentServlet
 
 class SpringInitializer extends WebApplicationInitializer {
 
@@ -29,5 +30,13 @@ class SpringInitializer extends WebApplicationInitializer {
 	def onStartup(container: ServletContext) {
 		createRootContext(container)
 		registerDispatcherServlet(container, createDispatcherContext())
+		registerJolokiaServlet(container)
 	}
+
+	def registerJolokiaServlet(container: ServletContext) {
+		val jolokia = container.addServlet("jmx", new AgentServlet)
+		jolokia.setLoadOnStartup(1)
+		jolokia.addMapping("/jmx/*")
+	}
+
 }

@@ -223,6 +223,11 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+		  <groupId>org.jolokia</groupId>
+		  <artifactId>jolokia-core</artifactId>
+		  <version>1.0.1</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>
