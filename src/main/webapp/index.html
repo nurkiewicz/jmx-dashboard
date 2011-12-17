@@ -3,11 +3,26 @@
 <head>
 	<meta charset="utf-8">
 	<title>System dashboard</title>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" type="text/css" media="all"/>
+	<style>
+		.jstree a > ins {
+			width: 32px !important;
+			height: 32px !important;
+		}
+		.jstree a {
+			height: 32px !important;
+			font-size: 22px;
+			line-height: 34px !important;
+		}
+	</style>
 </head>
 <body>
+<div id="jmxTree">&nbsp;</div>
 <div id="stats">&nbsp;</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script src="js/lib/jquery.jstree.js"></script>
 <script src="js/lib/jolokia.js"></script>
 <script src="js/dashboard.js"></script>
 </body>
