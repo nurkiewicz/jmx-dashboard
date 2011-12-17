@@ -16,6 +16,8 @@ import org.h2.tools.Server
 import org.springframework.core.io.ClassPathResource
 import org.springframework.scheduling.quartz.SchedulerFactoryBean
 import org.springframework.cache.ehcache.{EhCacheManagerFactoryBean, EhCacheCacheManager}
+import management.ManagementFactory
+import net.sf.ehcache.management.ManagementService
 
 /**
  * @author Tomasz Nurkiewicz
@@ -95,10 +97,15 @@ class SpringConfiguration {
 	@Bean def ehCacheManagerFactoryBean = {
 		val ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean
 		ehCacheManagerFactoryBean.setShared(true)
+		ehCacheManagerFactoryBean.setCacheManagerName("spring-pitfalls")
 		ehCacheManagerFactoryBean
 	}
 
 	def ehCacheManager() = ehCacheManagerFactoryBean.getObject
 
+	@Bean def platformMBeanServer() = ManagementFactory.getPlatformMBeanServer
+
+	@Bean(initMethod = "init", destroyMethod = "dispose")
+	def managementService = new ManagementService(ehCacheManager(), platformMBeanServer(), true, true, true, true, true)
 
 }

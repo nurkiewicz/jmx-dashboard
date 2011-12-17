@@ -12,6 +12,7 @@
            timeToLiveSeconds="60"
            overflowToDisk="false"
            memoryStoreEvictionPolicy="LRU"
+           statistics="true"
             />
 
 	<cache name="org.hibernate.cache.UpdateTimestampsCache"
@@ -21,6 +22,7 @@
 		   timeToLiveSeconds="86400"
 		   overflowToDisk="false"
 		   memoryStoreEvictionPolicy="LRU"
+		   statistics="true"
 			/>
 
 	<cache name="org.hibernate.cache.StandardQueryCache"
@@ -30,6 +32,7 @@
 		   timeToLiveSeconds="600"
 		   overflowToDisk="false"
 		   memoryStoreEvictionPolicy="LRU"
+		   statistics="true"
 			/>
 
 </ehcache>
