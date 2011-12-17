@@ -1,21 +1,13 @@
 package com.blogspot.nurkiewicz.spring
 
 import org.apache.commons.dbcp.BasicDataSource
-import org.springframework.jdbc.datasource.DataSourceTransactionManager
-import reflect.Block
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import org.springframework.stereotype.Controller
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
-import org.springframework.orm.jpa.{LocalContainerEntityManagerFactoryBean, JpaTransactionManager}
-import net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory
+import org.springframework.orm.jpa.JpaTransactionManager
 import org.hibernate.dialect.H2Dialect
 import scalaj.collection.Implicits._
-import org.springframework.data.repository.core.support.RepositoryFactorySupport
-import java.io.Serializable
-import org.springframework.data.repository.core.RepositoryMetadata
-import org.springframework.data.jpa.repository.support.JpaRepositoryFactory
-import com.blogspot.nurkiewicz.BookDao
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor
 import org.springframework.context.annotation._
@@ -23,6 +15,7 @@ import org.hibernate.cfg.ImprovedNamingStrategy
 import org.h2.tools.Server
 import org.springframework.core.io.ClassPathResource
 import org.springframework.scheduling.quartz.SchedulerFactoryBean
+import org.springframework.cache.ehcache.{EhCacheManagerFactoryBean, EhCacheCacheManager}
 
 /**
  * @author Tomasz Nurkiewicz
@@ -92,5 +85,20 @@ class SpringConfiguration {
 	    schedulerFactoryBean.setWaitForJobsToCompleteOnShutdown(true)
 	    schedulerFactoryBean
 	}
+
+	@Bean def cacheManager = {
+		val ehCacheCacheManager = new EhCacheCacheManager
+		ehCacheCacheManager.setCacheManager(ehCacheManager())
+		ehCacheCacheManager
+	}
+
+	@Bean def ehCacheManagerFactoryBean = {
+		val ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean
+		ehCacheManagerFactoryBean.setShared(true)
+		ehCacheManagerFactoryBean
+	}
+
+	def ehCacheManager() = ehCacheManagerFactoryBean.getObject
+
 
 }
