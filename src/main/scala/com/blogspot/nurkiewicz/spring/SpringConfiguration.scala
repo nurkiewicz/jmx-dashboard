@@ -54,7 +54,7 @@ class SpringConfiguration {
 
 	@Bean
 	def entityManagerFactoryBean() = {
-		val entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean()
+		val entityManagerFactoryBean = new JmxLocalContainerEntityManagerFactoryBean()
 		entityManagerFactoryBean.setDataSource(dataSource())
 		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter())
 		entityManagerFactoryBean.setPackagesToScan("com.blogspot.nurkiewicz")
@@ -62,7 +62,8 @@ class SpringConfiguration {
 			Map(
 				"hibernate.hbm2ddl.auto" -> "create",
 				"hibernate.format_sql" -> "true",
-				"hibernate.ejb.naming_strategy" -> classOf[ImprovedNamingStrategy].getName
+				"hibernate.ejb.naming_strategy" -> classOf[ImprovedNamingStrategy].getName,
+				"hibernate.generate_statistics" -> true.toString
 			).asJava
 		)
 		entityManagerFactoryBean
