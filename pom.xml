@@ -136,6 +136,19 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- Scheduling -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.1.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>c3p0</groupId>
+					<artifactId>c3p0</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -273,7 +286,7 @@
 			 <plugin>
 				 <groupId>org.apache.maven.plugins</groupId>
 				 <artifactId>maven-war-plugin</artifactId>
-				 <version>2.1.1</version>
+				 <version2.1.1</version>
 				 <configuration>
 					 <failOnMissingWebXml>false</failOnMissingWebXml>
 				 </configuration>

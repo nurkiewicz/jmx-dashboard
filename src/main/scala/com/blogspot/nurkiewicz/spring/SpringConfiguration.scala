@@ -21,6 +21,8 @@ import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcesso
 import org.springframework.context.annotation._
 import org.hibernate.cfg.ImprovedNamingStrategy
 import org.h2.tools.Server
+import org.springframework.core.io.ClassPathResource
+import org.springframework.scheduling.quartz.SchedulerFactoryBean
 
 /**
  * @author Tomasz Nurkiewicz
@@ -81,5 +83,13 @@ class SpringConfiguration {
 
 	@Bean(initMethod = "start", destroyMethod = "stop")
 	def h2WebServer() = Server.createWebServer("-webDaemon", "-webAllowOthers")
+
+	@Bean
+	def schedulerFactory() = {
+	    val schedulerFactoryBean = new SchedulerFactoryBean()
+	    schedulerFactoryBean.setConfigLocation(new ClassPathResource("quartz.properties"))
+	    schedulerFactoryBean.setWaitForJobsToCompleteOnShutdown(true)
+	    schedulerFactoryBean
+	}
 
 }
