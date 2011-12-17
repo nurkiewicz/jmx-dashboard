@@ -35,7 +35,7 @@ class SpringConfiguration {
 
 	@Bean(destroyMethod = "close")
 	def dataSource() = {
-		val ds = new BasicDataSource()
+		val ds = new ManagedBasicDataSource()
 		ds.setDriverClassName("org.h2.Driver")
 		ds.setUrl("jdbc:h2:mem:pitfalls")
 		ds.setUsername("sa")
