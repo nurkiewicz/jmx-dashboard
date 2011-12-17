@@ -31,9 +31,7 @@ import org.h2.tools.Server
 @ComponentScan(basePackages = Array("com.blogspot.nurkiewicz"),
 	scopedProxy = ScopedProxyMode.TARGET_CLASS,
 	excludeFilters = Array(
-		new ComponentScan.Filter(value = classOf[Controller]),
-		new ComponentScan.Filter(value = classOf[ComponentScan]),
-		new ComponentScan.Filter(value = classOf[EnableWebMvc])
+		new ComponentScan.Filter(value = Array[Class[_]](classOf[Controller], classOf[ComponentScan], classOf[EnableWebMvc]))
 ))
 @ImportResource(Array("classpath:/applicationContext.xml"))
 class SpringConfiguration {
