@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
+	<jmxConfigurator />
+
 	<logger name="org" level="INFO"/>
 	<logger name="org.hibernate.tool.hbm2ddl" level="ALL"/>
 	<logger name="org.hibernate.SQL" level="ALL"/>
