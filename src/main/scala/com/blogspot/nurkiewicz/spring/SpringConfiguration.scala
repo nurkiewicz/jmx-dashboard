@@ -18,6 +18,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean
 import org.springframework.cache.ehcache.{EhCacheManagerFactoryBean, EhCacheCacheManager}
 import management.ManagementFactory
 import net.sf.ehcache.management.ManagementService
+import org.springframework.jmx.export.annotation.AnnotationMBeanExporter
 
 /**
  * @author Tomasz Nurkiewicz
@@ -107,5 +108,7 @@ class SpringConfiguration {
 
 	@Bean(initMethod = "init", destroyMethod = "dispose")
 	def managementService = new ManagementService(ehCacheManager(), platformMBeanServer(), true, true, true, true, true)
+
+	@Bean def annotationMBeanExporter() = new AnnotationMBeanExporter()
 
 }

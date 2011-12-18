@@ -10,6 +10,5 @@
 
 	<!-- Workaround to DATAJPA-69 -->
     <jpa:repositories base-package="com.blogspot.nurkiewicz"/>
-	<context:mbean-export/>
 
 </beans>
