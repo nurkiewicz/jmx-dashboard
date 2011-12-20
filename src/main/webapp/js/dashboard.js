@@ -70,12 +70,12 @@ $(function() {
 						children: [
 							{
 								label: 'Open file descriptor count',
-								value: Math.random() * 25,
+								metric: Math.random() * 25,
 								evaluator: threshold(10, 18, 22)
 							},
 							{
 								label: 'System load average',
-								value: Math.random() * 25,
+								metric: Math.random() * 25,
 								evaluator: threshold(10, 18, 22)
 							},
 							{
@@ -83,12 +83,12 @@ $(function() {
 								children: [
 									{
 										label: 'Free swap space size',
-										value: Math.random() * 25,
+										metric: Math.random() * 25,
 										evaluator: threshold(10, 18, 22)
 									},
 									{
 										label: 'Free physical memory size',
-										value: Math.random() * 25,
+										metric: Math.random() * 25,
 										evaluator: threshold(10, 18, 22)
 									}
 								]
@@ -97,12 +97,12 @@ $(function() {
 					},
 					{
 						label: 'Persistence',
-						value: Math.random() * 25,
+						metric: Math.random() * 25,
 						evaluator: threshold(10, 18, 22)
 					},
 					{
 						label: 'Web',
-						value: Math.random() * 25,
+						metric: Math.random() * 25,
 						evaluator: threshold(10, 18, 22)
 					}
 				]
@@ -110,8 +110,32 @@ $(function() {
 		];
 	}
 
+	function evaluatedMetric(model) {
+		if(model.evaluator) {
+			return model.evaluator(model.metric)
+		}
+		return _(model.children).chain().
+				map(evaluatedMetric).
+				min().
+				value();
+	}
+
+	function nodeIcon(evaluatedValue) {
+		if(evaluatedValue >= 1) {
+			return 'img/accept.png';
+		}
+		if(evaluatedValue >= 0.5) {
+			return 'img/magnifier.png';
+		}
+		if(evaluatedValue >= 0.0) {
+			return 'img/error.png';
+		}
+		return 'img/alarm_bell.png';
+	}
+
 	function treeModelToJsTree(model) {
-		var data = {title: model.label + ' (' + model.value + ')', icon: 'img/accept.png'};
+		var iconImg = nodeIcon(evaluatedMetric(model))
+		var data = {title: model.label, icon: iconImg};
 		if (model.children) {
 			return {data: data, children: _.map(model.children, treeModelToJsTree)}
 		} else {
