@@ -39,6 +39,7 @@ $(function() {
 				"plugins" : ["json_data", "ui", "themeroller"]
 			}).bind("select_node.jstree", function (e, data) {
 						data.inst.toggle_node(data.rslt.obj);
+						console.info(data.rslt.obj.data('metric'));
 					});
 		}
 	});
@@ -134,13 +135,15 @@ $(function() {
 	}
 
 	function treeModelToJsTree(model) {
-		var iconImg = nodeIcon(evaluatedMetric(model))
-		var data = {title: model.label, icon: iconImg};
-		if (model.children) {
-			return {data: data, children: _.map(model.children, treeModelToJsTree)}
-		} else {
-			return {data: data};
-		}
+		var iconImg = nodeIcon(evaluatedMetric(model));
+		return {
+			data: {
+				title: model.label,
+				icon: iconImg
+			},
+			metadata: {metric: model.metric},
+			children: _.map(model.children, treeModelToJsTree)
+		};
 	}
 
 });
