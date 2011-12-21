@@ -1,21 +1,27 @@
 $(function() {
 	var mbeans = [
-		{name: "java.lang:type=Memory"},
-		{name: "com.blogspot.nurkiewicz.spring:name=dataSource,type=ManagedBasicDataSource"},
-		{name: "java.lang:type=OperatingSystem"},
-		{name: "java.lang:type=Runtime"},
-		{name: "quartz:type=QuartzScheduler,name=schedulerFactory,instance=NON_CLUSTERED"},
-		{name: "java.lang:type=Threading"},
-		{name: 'Catalina:name="http-bio-8080",type=ThreadPool', attribute: 'currentThreadsBusy'},
-		{name: 'Catalina:type=GlobalRequestProcessor,name="http-bio-8080"'},
-		{name: 'org.hibernate:type=Statistics,application=spring-pitfalls'}
+		"java.lang:type=Memory",
+		"java.lang:type=MemoryPool,name=Code Cache",
+		"java.lang:type=MemoryPool,name=PS Eden Space",
+		"java.lang:type=MemoryPool,name=PS Old Gen",
+		"java.lang:type=MemoryPool,name=PS Perm Gen",
+		"java.lang:type=MemoryPool,name=PS Survivor Space",
+		"java.lang:type=OperatingSystem",
+		"java.lang:type=Runtime",
+		"java.lang:type=Threading",
+		"com.blogspot.nurkiewicz.spring:name=dataSource,type=ManagedBasicDataSource",
+		"quartz:type=QuartzScheduler,name=schedulerFactory,instance=NON_CLUSTERED",
+		"net.sf.ehcache:type=CacheStatistics,CacheManager=spring-pitfalls,name=org.hibernate.cache.StandardQueryCache",
+		"net.sf.ehcache:type=CacheStatistics,CacheManager=spring-pitfalls,name=org.hibernate.cache.UpdateTimestampsCache",
+		'Catalina:name="http-bio-8080",type=ThreadPool',
+		'Catalina:type=GlobalRequestProcessor,name="http-bio-8080"',
+		'Catalina:type=Manager,context=/spring-pitfalls,host=localhost',
+		'org.hibernate:type=Statistics,application=spring-pitfalls'
 	];
-
 	var request = _.map(mbeans, function(mbean) {
 		return {
 			type:'read',
-			mbean: mbean.name,
-			attribute: mbean.attribute
+			mbean: mbean
 		}
 	});
 	$.ajax({
