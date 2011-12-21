@@ -19,7 +19,7 @@ $(function() {
 		}
 	});
 	$.ajax({
-		url: 'jmx',
+		url: 'jmx?ignoreErrors=true',
 		type: "POST",
 		dataType: "json",
 		data: JSON.stringify(request),
