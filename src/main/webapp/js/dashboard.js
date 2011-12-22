@@ -97,16 +97,26 @@ $(function() {
 
 	function buildTreeModel(jmx) {
 		return new CompositeNode('General', [
-			new CompositeNode('Operating system', [
-				new Node('Open file descriptor count', Math.random() * 25, Node.threshold(10, 18, 22)),
-				new Node('System load average', Math.random() * 25, Node.threshold(10, 18, 22)),
-				new CompositeNode('Memory', [
-					new Node('Free swap space size', Math.random() * 25, Node.threshold(10, 18, 22)),
-					new Node('Free physical memory size', Math.random() * 25, Node.threshold(10, 18, 22))
+			new CompositeNode('Server', [
+				new CompositeNode('Hardware', [
+					new Node('Open file descriptor count', Math.random() * 25, Node.threshold(10, 18, 22)),
+					new Node('System load average', Math.random() * 25, Node.threshold(10, 18, 22)),
+					new CompositeNode('Memory', [
+						new Node('Free swap space size', Math.random() * 25, Node.threshold(10, 18, 22)),
+						new Node('Free physical memory size', Math.random() * 25, Node.threshold(10, 18, 22))
+					])
+				]),
+				new CompositeNode('Operating system', []),
+				new CompositeNode('Application', [
+					new CompositeNode('Java virtual machine', []),
+					new CompositeNode('Persistence', [])
 				])
 			]),
+			new CompositeNode('Environment', [
+				new CompositeNode('External systems', []),
+				new Node('Web', Math.random() * 25, Node.threshold(10, 18, 22))
+			]),
 			new Node('Persistence', Math.random() * 25, Node.threshold(10, 18, 22)),
-			new Node('Web', Math.random() * 25, Node.threshold(10, 18, 22))
 		]);
 	}
 
