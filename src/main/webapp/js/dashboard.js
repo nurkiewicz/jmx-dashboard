@@ -129,7 +129,7 @@ $(function() {
 						'Busy worker threads count',
 						jmx['Catalina:name="http-bio-8080",type=ThreadPool'].currentThreadsBusy,
 						Node.relativeThreshold(0.85, 0.9, 0.95, jmx['Catalina:name="http-bio-8080",type=ThreadPool'].maxThreads)
-				),
+				)
 			]),
 			new CompositeNode('JVM', [
 				new Node(
@@ -186,7 +186,7 @@ $(function() {
 							'Active database connections',
 							jmx['com.blogspot.nurkiewicz.spring:name=dataSource,type=ManagedBasicDataSource'].NumActive,
 							Node.relativeThreshold(0.75, 0.85, 0.95, jmx['com.blogspot.nurkiewicz.spring:name=dataSource,type=ManagedBasicDataSource'].MaxActive)
-					),
+					)
 				]),
 				new CompositeNode('JMS messaging broker', [
 					new Node(
@@ -199,7 +199,7 @@ $(function() {
 							jmx['org.apache.activemq:BrokerName=localhost,Destination=requests,Type=Queue'].ConsumerCount,
 							Node.threshold(0.2, 0.1, 0)
 					)
-				]),
+				])
 			])
 		]);
 	}
