@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.blogspot.nurkiewicz</groupId>
-	<artifactId>spring-pitfalls</artifactId>
-	<name>Spring framework pitfalls</name>
-	<description>Spring framework pitfalls traps and pitfalls explained and fixed</description>
+	<artifactId>jmx-dashboard</artifactId>
+	<name>JMX client-side dashboard</name>
+	<description>Client-side JMX monitoring with Jolokia and jsTree</description>
 	<packaging>war</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<properties>
@@ -280,7 +280,7 @@
 	</dependencies>
 
 	<build>
-        <finalName>spring-pitfalls</finalName>
+        <finalName>jmx-dashboard</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.scala-tools</groupId>

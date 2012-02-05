@@ -38,7 +38,7 @@ class SpringConfiguration {
 	def dataSource() = {
 		val ds = new ManagedBasicDataSource()
 		ds.setDriverClassName("org.h2.Driver")
-		ds.setUrl("jdbc:h2:mem:pitfalls")
+		ds.setUrl("jdbc:h2:mem:jmx-dashboard")
 		ds.setUsername("sa")
 		ds
 	}
@@ -98,7 +98,7 @@ class SpringConfiguration {
 	@Bean def ehCacheManagerFactoryBean = {
 		val ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean
 		ehCacheManagerFactoryBean.setShared(true)
-		ehCacheManagerFactoryBean.setCacheManagerName("spring-pitfalls")
+		ehCacheManagerFactoryBean.setCacheManagerName("jmx-dashboard")
 		ehCacheManagerFactoryBean
 	}
 

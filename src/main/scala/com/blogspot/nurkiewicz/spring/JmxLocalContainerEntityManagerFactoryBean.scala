@@ -21,7 +21,7 @@ class JmxLocalContainerEntityManagerFactoryBean() extends LocalContainerEntityMa
 				val mBean = new StatisticsService();
 				mBean.setStatisticsEnabled(true)
 				mBean.setSessionFactory(impl.getSessionFactory);
-				val name = new ObjectName("org.hibernate:type=Statistics,application=spring-pitfalls")
+				val name = new ObjectName("org.hibernate:type=Statistics,application=jmx-dashboard")
 				ManagementFactory.getPlatformMBeanServer.registerMBean(mBean, name);
 			case _ =>
 		}

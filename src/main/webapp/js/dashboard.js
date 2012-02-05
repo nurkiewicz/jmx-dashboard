@@ -13,10 +13,10 @@ $(function() {
 			"java.lang:type=Threading",
 			'Catalina:name="http-bio-8080",type=ThreadPool',
 			'Catalina:type=GlobalRequestProcessor,name="http-bio-8080"',
-			'Catalina:type=Manager,context=/spring-pitfalls,host=localhost',
-			'org.hibernate:type=Statistics,application=spring-pitfalls',
-			"net.sf.ehcache:type=CacheStatistics,CacheManager=spring-pitfalls,name=org.hibernate.cache.StandardQueryCache",
-			"net.sf.ehcache:type=CacheStatistics,CacheManager=spring-pitfalls,name=org.hibernate.cache.UpdateTimestampsCache",
+			'Catalina:type=Manager,context=/jmx-dashboard,host=localhost',
+			'org.hibernate:type=Statistics,application=jmx-dashboard',
+			"net.sf.ehcache:type=CacheStatistics,CacheManager=jmx-dashboard,name=org.hibernate.cache.StandardQueryCache",
+			"net.sf.ehcache:type=CacheStatistics,CacheManager=jmx-dashboard,name=org.hibernate.cache.UpdateTimestampsCache",
 			"quartz:type=QuartzScheduler,name=schedulerFactory,instance=NON_CLUSTERED",
 			'org.apache.activemq:BrokerName=localhost,Type=Queue,Destination=requests',
 			"com.blogspot.nurkiewicz.spring:name=dataSource,type=ManagedBasicDataSource"
@@ -112,17 +112,17 @@ $(function() {
 			new CompositeNode('Servlet container', [
 				new Node(
 						'Active HTTP sessions',
-						jmx['Catalina:context=/spring-pitfalls,host=localhost,type=Manager'].activeSessions,
+						jmx['Catalina:context=/jmx-dashboard,host=localhost,type=Manager'].activeSessions,
 						Node.threshold(200, 300, 500)
 				),
 				new Node(
 						'HTTP sessions create rate',
-						jmx['Catalina:context=/spring-pitfalls,host=localhost,type=Manager'].sessionCreateRate,
+						jmx['Catalina:context=/jmx-dashboard,host=localhost,type=Manager'].sessionCreateRate,
 						Node.threshold(5, 10, 50)
 				),
 				new Node(
 						'Rejected HTTP sessions',
-						jmx['Catalina:context=/spring-pitfalls,host=localhost,type=Manager'].rejectedSessions,
+						jmx['Catalina:context=/jmx-dashboard,host=localhost,type=Manager'].rejectedSessions,
 						Node.threshold(1, 5, 10)
 				),
 				new Node(
