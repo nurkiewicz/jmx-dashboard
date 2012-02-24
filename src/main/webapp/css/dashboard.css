@@ -1,0 +1,10 @@
+.jstree a > ins {
+	width: 32px !important;
+	height: 32px !important;
+}
+
+.jstree a {
+	height: 32px !important;
+	font-size: 22px;
+	line-height: 34px !important;
+}
