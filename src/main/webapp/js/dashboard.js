@@ -62,9 +62,22 @@ $(function() {
 			var model = buildTreeModel(jmxAttributes(response));
 			var jsTree = treeModelToJsTree(model);
 			buildTree(jsTree);
+			displayRawData(response);
 		}
 	});
 
+	$('#tabs').tabs();
+	
+	function displayRawData(fullResponse) {
+		_(fullResponse).each(function (response) {
+			var content = $('<pre/>').append(JSON.stringify(response.value, null, '\t'));
+			var header = $('<h3/>').append($("<a/>", {href:'#'}).append(response.request.mbean));
+			$('#rawDataPanel').
+					append(header).
+					append($('<div/>').append(content));
+		});
+		$('#rawDataPanel').accordion({autoHeight: false, collapsible: true});
+	}
 
 	function Node(label, metric, evaluatorFn) {
 		this.label = label;
