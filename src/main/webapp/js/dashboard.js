@@ -180,7 +180,7 @@ $(function() {
 				new Node(
 						'Free swap space',
 						jmx['java.lang:type=OperatingSystem'].FreeSwapSpaceSize,
-						Node.relativeThreshold(0.75, 0.85, 0.95, jmx['java.lang:type=OperatingSystem'].TotalSwapSpaceSize)
+						Node.relativeThreshold(0.25, 0.15, 0.05, jmx['java.lang:type=OperatingSystem'].TotalSwapSpaceSize)
 				),
 				new Node(
 						'Average system load (%)',
