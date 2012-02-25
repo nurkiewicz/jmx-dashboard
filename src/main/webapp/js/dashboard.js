@@ -87,25 +87,25 @@ $(function() {
 		}
 	}
 
-	Node.threshold = function(attention, warning, error) {
-			if(attention > warning && warning > error) {
+	Node.threshold = function(attention, warning, fatal) {
+			if(attention > warning && warning > fatal) {
 				return function(value) {
 					if(value > attention) { return 1.0; }
 					if(value > warning) { return 0.5; }
-					if(value > error) { return 0.0; } else { return -1.0; }
+					if(value > fatal) { return 0.0; } else { return -1.0; }
 				}
 			}
-			if(attention < warning && warning < error) {
+			if(attention < warning && warning < fatal) {
 				return function(value) {
 					if(value < attention) { return 1.0; }
 					if(value < warning) { return 0.5; }
-					if(value < error) { return 0.0; } else { return -1.0; }
+					if(value < fatal) { return 0.0; } else { return -1.0; }
 				}
 			}
-			throw new Error("All thresholds should either be increasing or decreasing: " + attention + ", " + warning + ", " + error);
+			throw new Error("All thresholds should either be increasing or decreasing: " + attention + ", " + warning + ", " + fatal);
 		};
-	Node.relativeThreshold = function(attention, warning, error, max) {
-		return Node.threshold(attention * max, warning * max, error * max);
+	Node.relativeThreshold = function(attention, warning, fatal, max) {
+		return Node.threshold(attention * max, warning * max, fatal * max);
 	};
 
 	function CompositeNode(label, children) {
